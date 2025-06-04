@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import fechas.LibFechas8;
 
-public class Dni {
+public class Dni implements Comparable<Dni>{
 
 	/**
 	 * Variables de instancia
@@ -77,6 +77,14 @@ public class Dni {
 	public String toString() {
 		return "Dni [dni=" + dni + ", nombre=" + nombre + ", numTelefono=" + numTelefono + ", fechaNacimiento="
 				+ fechaNacimiento + "]";
+	}
+
+
+
+	@Override
+	public int compareTo(Dni otroNombre) {
+		
+		return this.getNombre().compareTo(otroNombre.getNombre());
 	}
 
 

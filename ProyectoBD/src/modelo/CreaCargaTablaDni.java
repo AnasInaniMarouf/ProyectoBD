@@ -5,7 +5,7 @@ import fechas.LibFechas8;
 
 import java.io.*;
 
-public class CreaCargaTablaDisco {
+public class CreaCargaTablaDni {
 
 	public static void main(String[] args) {
 		
@@ -19,7 +19,7 @@ public class CreaCargaTablaDisco {
 	
 			
 			// Establecer la conexion
-			String url = "jdbc:mysql://localhost:3306/dni";
+			String url = "jdbc:mysql://localhost:3306/DocumentoIdentidad";
 			String usuario = "admin";
 			String clave   = "1234";
 			conexion = DriverManager.getConnection(url, usuario, clave);
@@ -54,11 +54,11 @@ public class CreaCargaTablaDisco {
 	 */
 	public static void creaTablaDiscos(Connection con) throws SQLException
 	{
-		String creaTabla = "create table dni.dni " +
+		String creaTabla = "create table DocumentoIdentidad.dni " +
 	                       "(dni VARCHAR(9) NOT NULL PRIMARY KEY, " +
 				           "nombre VARCHAR(50) NOT NULL, " +
 	                       "numTelefono VARCHAR(50) NOT NULL, " +
-				           "fechaNacimiento DATE";
+				           "fechaNacimiento DATE)";
 		System.out.println("Se va a ejecutar: "+creaTabla);
 		
 		Statement stmt = null;

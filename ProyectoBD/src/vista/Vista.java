@@ -1,6 +1,8 @@
 package vista;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +16,7 @@ public class Vista extends JFrame{
 	
 	private static final long serialVersionUID = -5752211613049689258L;
 
-	private JButton guardar, limpiar, eliminar, abrirImagen;
+	private JButton guardar, limpiar, eliminar, abrirImagen, abrir;
 	private JLabel nom, DNI, tel, fech;
 	private JTextField nombre, dni, numTelefono, fecha;
 	private ImageIcon icono;
@@ -45,6 +47,7 @@ public class Vista extends JFrame{
 		
 		JPanel panel = new JPanel();
 		
+		ImageIcon iconoAbrir = new ImageIcon("./src/imgs/abrir.png");
 		ImageIcon iconoGuardar = new ImageIcon("./src/imgs/guardar.png");
 		ImageIcon iconoLimpiar = new ImageIcon("./src/imgs/limpiar.png");
 		ImageIcon iconoEliminar = new ImageIcon("./src/imgs/eliminar.png");
@@ -56,13 +59,20 @@ public class Vista extends JFrame{
 		this.eliminarArchivo = new JMenuItem("Eliminar");
 		this.abrirArchivo = new JMenuItem("Abrir");
 		//-------
+		this.abrir = new JButton();
 		this.guardar = new JButton();
 		this.limpiar = new JButton();
 		this.eliminar = new JButton();
 		//-------
+		this.abrir.setIcon(iconoAbrir);
 		this.guardar.setIcon(iconoGuardar);
 		this.limpiar.setIcon(iconoLimpiar);
 		this.eliminar.setIcon(iconoEliminar);
+		
+		abrirArchivo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+		guardarArchivo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
+		limpiarArchivo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
+		eliminarArchivo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
 		
 		archivo.add(abrirArchivo);
 		archivo.add(guardarArchivo);
@@ -76,6 +86,7 @@ public class Vista extends JFrame{
 		//
 		barra.add(Box.createHorizontalGlue()); //Separar los menus a la derecha e izquierda
 		//
+		barra.add(abrir);
 		barra.add(guardar);
 		barra.add(limpiar);
 		barra.add(eliminar);
@@ -154,9 +165,15 @@ public class Vista extends JFrame{
 	public void control(Controlador ctr) {
 		
 		this.abrirImagen.addActionListener(ctr);
+		this.abrir.addActionListener(ctr);
 		this.guardar.addActionListener(ctr);
-		//this.limpiar.addActionListener(ctr);
-		//this.eliminar.addActionListener(ctr);
+		this.limpiar.addActionListener(ctr);
+		this.eliminar.addActionListener(ctr);
+		
+		this.abrirArchivo.addActionListener(ctr);
+		this.guardarArchivo.addActionListener(ctr);
+		this.limpiarArchivo.addActionListener(ctr);
+		this.eliminarArchivo.addActionListener(ctr);
 	}
 	
 
@@ -250,6 +267,14 @@ public class Vista extends JFrame{
 
 	public JMenuItem getEliminarArchivo() {
 		return eliminarArchivo;
+	}
+
+	public JMenuItem getAbrirArchivo() {
+		return abrirArchivo;
+	}
+
+	public JButton getAbrir() {
+		return abrir;
 	}
 	
 	
