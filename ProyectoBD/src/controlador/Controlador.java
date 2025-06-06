@@ -12,7 +12,7 @@ public class Controlador implements ActionListener{
 	public Controlador(Vista v) {
 		
 		this.vista = v;
-	}
+	} //
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
