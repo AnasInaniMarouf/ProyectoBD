@@ -123,7 +123,7 @@ public class Vista extends JFrame{
 		this.nom = new JLabel("Nombre: ");
 		this.DNI = new JLabel("Documento de Identidad: ");
 		this.tel = new JLabel("Número de teléfono: ");
-		this.fech = new JLabel("Fecha actual: ");
+		this.fech = new JLabel("Fecha de Nacimiento: ");
 		
 		this.nombre = new JTextField();
 		this.dni = new JTextField();

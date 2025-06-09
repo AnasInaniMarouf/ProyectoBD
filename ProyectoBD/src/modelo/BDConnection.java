@@ -9,7 +9,7 @@ import java.util.Properties;
 public class BDConnection {
 
 	// Variable de clase constante con la ruta de la BD
-	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/dni";
+	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/documentoidentidad";
 	private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
 	
 	// Variable de clase con el objeto que tendrá la conexión a la BD

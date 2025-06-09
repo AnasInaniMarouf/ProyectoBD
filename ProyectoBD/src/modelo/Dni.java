@@ -1,7 +1,6 @@
 package modelo;
 
 import java.time.LocalDate;
-
 import fechas.LibFechas8;
 
 public class Dni implements Comparable<Dni>{
@@ -21,15 +20,64 @@ public class Dni implements Comparable<Dni>{
 	 */
 	public Dni(String dni, String nombre, int numTelefono, String fecha) 
 			       throws MiExcepcion {
-		super();
 		
-		if (!LibFechas8.isFechaCorrecta(fecha))  // Validar que la fecha sea correcta
-			throw new MiExcepcion("Fecha no válida");
+		if (!this.validarNif(dni)) {
+
+			throw new MiExcepcion("DNI no válido");
+		}
 		
 		this.dni = dni;
-		this.nombre = nombre;
+
+		if (numTelefono > 999999999 || numTelefono < 99999999) {
+
+			throw new MiExcepcion("Número de teléfono no válido");
+		}
+		
 		this.numTelefono = numTelefono;
+
+		if (nombre == "") {
+			
+			throw new MiExcepcion("Nombre no válido");
+		}
+		this.nombre = nombre;
+		
+		if (!LibFechas8.isFechaCorrecta(fecha)) {
+			
+			throw new MiExcepcion("Fecha no válida");
+		}
+		
 		this.fechaNacimiento = LibFechas8.convierteStringToLocalDate(fecha);
+	}
+	
+	public boolean validarNif(String nif) {
+
+		int num=0;
+		char letra=' ';
+
+		try {
+			num=Integer.parseInt(nif.substring(0,8));
+
+			char[] arrayChar = new char[1];
+			nif.substring(8).getChars(0, 1, arrayChar, 0);
+
+			letra=arrayChar[0];
+
+			char[] letrasNif = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 
+					'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 
+					'C', 'K', 'E', 'T'};
+
+			if(letra!=letrasNif[num%23]) {
+				
+				//JOptionPane.showMessageDialog(this.vista, "Letra final correspondiente: "
+						//+letrasNif[num%23], "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+				return false;
+			}
+
+		}catch(NumberFormatException | StringIndexOutOfBoundsException e) {
+			return false;
+		}
+
+		return true;
 	}
 
 

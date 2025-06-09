@@ -127,7 +127,7 @@ public class DAODni {
 	 * @throws SQLException 
 	 * @throws MiExcepcion 
 	 */
-	public Dni crearDisco() throws MiExcepcion, SQLException {
+	public Dni crearDni() throws MiExcepcion, SQLException {
 		return new Dni(
 					rsNavegar.getString("dni"),
 					rsNavegar.getString("nombre"),
@@ -149,7 +149,7 @@ public class DAODni {
 	public Dni getPrimero() throws SQLException, MiExcepcion {
 		
 		this.rsNavegar.first();
-		return this.crearDisco();
+		return this.crearDni();
 	}
 	
 	/**
@@ -158,7 +158,7 @@ public class DAODni {
 	 */
 	public Dni getUltimo() throws SQLException, MiExcepcion {
 		rsNavegar.last();
-		return this.crearDisco();
+		return this.crearDni();
 	}
 	
 	/**	 
@@ -167,7 +167,7 @@ public class DAODni {
 	 */
 	public Dni getSiguiente() throws SQLException, MiExcepcion {
 		rsNavegar.next();
-		return this.crearDisco();
+		return this.crearDni();
 	}
 		
 	/**
@@ -176,7 +176,7 @@ public class DAODni {
 	 */
 	public Dni getAnterior() throws SQLException, MiExcepcion {
 		rsNavegar.previous();
-		return this.crearDisco();
+		return this.crearDni();
 	}
 	
 	/**
@@ -184,10 +184,10 @@ public class DAODni {
 	 * @param ob -- disco que se va a a�adir
 	 * @throws SQLException
 	 */
-	public void insertaDisco(Dni ob) throws SQLException {
+	public void insertaDni(Dni ob) throws SQLException {
 		
 		PreparedStatement ps = 
-				con.prepareStatement("insert into dni.dni values (?,?,?,?)");
+				con.prepareStatement("insert into documentoidentidad.dni values (?,?,?,?)");
 
 		ps.setString(1,ob.getDni());
 		ps.setString(2, ob.getNombre());
@@ -206,7 +206,7 @@ public class DAODni {
 	 * con los datos modificados llega como par�metro, se puede modificar todo
 	 * excepto el c�digo del disco
 	 */
-	public void modificaDisco(Dni ob) throws SQLException {
+	public void modificaDni(Dni ob) throws SQLException {
 		
 		PreparedStatement ps = con.prepareStatement(
 				"UPDATE dni SET nombre = ?, numTelefono = ?, fechaNacimiento = ? WHERE dni = ?");
@@ -228,11 +228,11 @@ public class DAODni {
 	 * Metodo que permite borrar el disco cuyo código coincide con el que nos
 	 * llega como parámetro
 	 */
-	public void eliminaDisco(int cod) throws SQLException{
+	public void eliminaDni(String dni) throws SQLException{
 		PreparedStatement ps = 
 				con.prepareStatement("DELETE FROM dni WHERE dni = ?");
 		
-		ps.setInt(1, cod);
+		ps.setString(1, dni);
 
 		ps.executeUpdate();
 		ps.close();
@@ -252,15 +252,16 @@ public class DAODni {
 	
 		rsNavegar.beforeFirst(); // Para posicionar la consulta al principio
 		
-		List<Dni> listaDiscos = new ArrayList<>();
+		List<Dni> listaDni = new ArrayList<>();
 
 		while (rsNavegar.next()) {
-			listaDiscos.add(crearDisco());
+			
+			listaDni.add(crearDni());
 		}
 
 		rsNavegar.beforeFirst();
 		
-		return listaDiscos;
+		return listaDni;
 	}
 	
 	
@@ -307,7 +308,7 @@ public class DAODni {
 		
 		// Crear la consulta, mejor parametrizarla si la fecha se le va a pedir al usuario
 		java.sql.Date fechaDateConsulta = Date.valueOf(LocalDate.of(2010, 01, 01));
-		String consulta = "select * from discos where fechaPubli>'"+fechaDateConsulta+"'";
+		String consulta = "select * from dni where fechaNacimiento>'"+fechaDateConsulta+"'";
 	
 		ResultSet rsConsulta = null;  
 		rsConsulta = this.stmt.executeQuery(consulta);

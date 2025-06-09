@@ -1,8 +1,10 @@
 package modelo;
 
+import java.sql.SQLException;
+
 public class TestConsola {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, MiExcepcion {
 		Dni d1 = null;
 		// -----------------------------------------------
 		// Prueba clase disco
@@ -21,12 +23,6 @@ public class TestConsola {
 		
 		System.out.println("-------------");
 		
-		DniColeccion dni = new DniColeccion(d1);
-		
-		dni.añadeDni(d1);
-		
-		System.out.println(dni.toString());
-		System.out.println(dni.compareTo(d1));
 	}
 
 }
