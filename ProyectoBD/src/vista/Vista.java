@@ -30,6 +30,8 @@ public class Vista extends JFrame{
 		
 		super("DNI");
 		
+		this.setIconImage(new ImageIcon(("./src/imgs/icono.png")).getImage());
+		
 		JPanel panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BorderLayout());
 		

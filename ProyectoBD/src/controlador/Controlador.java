@@ -102,7 +102,10 @@ public class Controlador implements ActionListener{
 				if (JOptionPane.showConfirmDialog(vista, "¿Estás seguro que quieres eliminar el usuario?") == JOptionPane.YES_OPTION) {
 
 					try {
+						
 						this.daoDni.eliminaDni(dni);
+						JOptionPane.showMessageDialog(vista, "El dni se ha eliminado correctamente");
+						
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

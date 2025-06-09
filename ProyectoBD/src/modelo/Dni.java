@@ -35,7 +35,7 @@ public class Dni implements Comparable<Dni>{
 		
 		this.numTelefono = numTelefono;
 
-		if (nombre == "") {
+		if (nombre.isEmpty()) {
 			
 			throw new MiExcepcion("Nombre no válido");
 		}
