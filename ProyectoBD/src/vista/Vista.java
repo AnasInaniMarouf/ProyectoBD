@@ -17,14 +17,13 @@ public class Vista extends JFrame{
 	private static final long serialVersionUID = -5752211613049689258L;
 
 	private JButton guardar, limpiar, eliminar, abrirImagen, abrir;
+	private JButton primero, anterior, siguiente, ultimo;
 	private JLabel nom, DNI, tel, fech;
 	private JTextField nombre, dni, numTelefono, fecha;
 	private ImageIcon icono;
 	private JLabel textoImagen;
 	private BufferedImage imagen;
 	private JMenuBar barra;
-	private JMenu archivo;
-	private JMenuItem guardarArchivo, limpiarArchivo, eliminarArchivo, abrirArchivo;
 	
 	public Vista() {
 		
@@ -54,44 +53,48 @@ public class Vista extends JFrame{
 		ImageIcon iconoLimpiar = new ImageIcon("./src/imgs/limpiar.png");
 		ImageIcon iconoEliminar = new ImageIcon("./src/imgs/eliminar.png");
 		
+		ImageIcon iconoPrimero = new ImageIcon("./src/imgs/Primero.png");
+		ImageIcon iconoAnterior = new ImageIcon("./src/imgs/Anterior.png");
+		ImageIcon iconoSiguiente = new ImageIcon("./src/imgs/Siguiente.png");
+		ImageIcon iconoUltimo = new ImageIcon("./src/imgs/Ultimo.png");
+		
 		this.barra = new JMenuBar();
-		this.archivo = new JMenu("Archivo");
-		this.guardarArchivo = new JMenuItem("Guardar");
-		this.limpiarArchivo = new JMenuItem("Limpiar");
-		this.eliminarArchivo = new JMenuItem("Eliminar");
-		this.abrirArchivo = new JMenuItem("Abrir");
 		//-------
 		this.abrir = new JButton();
 		this.guardar = new JButton();
 		this.limpiar = new JButton();
 		this.eliminar = new JButton();
+		
+		this.primero = new JButton();
+		this.anterior = new JButton();
+		this.siguiente = new JButton();
+		this.ultimo = new JButton();
 		//-------
 		this.abrir.setIcon(iconoAbrir);
 		this.guardar.setIcon(iconoGuardar);
 		this.limpiar.setIcon(iconoLimpiar);
 		this.eliminar.setIcon(iconoEliminar);
 		
-		abrirArchivo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
-		guardarArchivo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
-		limpiarArchivo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
-		eliminarArchivo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, ActionEvent.CTRL_MASK));
+		this.primero.setIcon(iconoPrimero);
+		this.anterior.setIcon(iconoAnterior);
+		this.siguiente.setIcon(iconoSiguiente);
+		this.ultimo.setIcon(iconoUltimo);
 		
-		archivo.add(abrirArchivo);
-		archivo.add(guardarArchivo);
-		archivo.add(limpiarArchivo);
-		archivo.add(eliminarArchivo);
 		
 		this.setJMenuBar(barra); //Añadir barra al frame
 		
-		//Añadir los menus a la barra de menus
-		barra.add(archivo);
-		//
-		barra.add(Box.createHorizontalGlue()); //Separar los menus a la derecha e izquierda
-		//
+		//Añadir los botones a la barra de menus
 		barra.add(abrir);
 		barra.add(guardar);
 		barra.add(limpiar);
 		barra.add(eliminar);
+		//
+		barra.add(Box.createHorizontalGlue()); //Separar los menus a la derecha e izquierda
+		//
+		barra.add(primero);
+		barra.add(anterior);
+		barra.add(siguiente);
+		barra.add(ultimo);
 		
 		return panel;
 	}
@@ -172,10 +175,10 @@ public class Vista extends JFrame{
 		this.limpiar.addActionListener(ctr);
 		this.eliminar.addActionListener(ctr);
 		
-		this.abrirArchivo.addActionListener(ctr);
-		this.guardarArchivo.addActionListener(ctr);
-		this.limpiarArchivo.addActionListener(ctr);
-		this.eliminarArchivo.addActionListener(ctr);
+		this.primero.addActionListener(ctr);
+		this.anterior.addActionListener(ctr);
+		this.siguiente.addActionListener(ctr);
+		this.ultimo.addActionListener(ctr);
 	}
 	
 
@@ -254,30 +257,28 @@ public class Vista extends JFrame{
 		return barra;
 	}
 
-	public JMenu getArchivo() {
-		return archivo;
-	}
-
-
-	public JMenuItem getGuardarArchivo() {
-		return guardarArchivo;
-	}
-
-	public JMenuItem getLimpiarArchivo() {
-		return limpiarArchivo;
-	}
-
-	public JMenuItem getEliminarArchivo() {
-		return eliminarArchivo;
-	}
-
-	public JMenuItem getAbrirArchivo() {
-		return abrirArchivo;
-	}
 
 	public JButton getAbrir() {
 		return abrir;
 	}
+
+	public JButton getPrimero() {
+		return primero;
+	}
+
+	public JButton getAnterior() {
+		return anterior;
+	}
+
+	public JButton getSiguiente() {
+		return siguiente;
+	}
+
+	public JButton getUltimo() {
+		return ultimo;
+	}
+	
+	
 	
 	
 	

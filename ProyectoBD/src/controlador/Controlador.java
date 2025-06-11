@@ -5,7 +5,6 @@ import java.io.*;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
-
 import modelo.DAODni;
 import modelo.Dni;
 import modelo.MiExcepcion;
@@ -48,12 +47,14 @@ public class Controlador implements ActionListener{
 			}
 		}
 		
-		if (e.getSource() == vista.getAbrir() || e.getSource() == vista.getAbrirArchivo()) {
+		if (e.getSource() == vista.getAbrir()) {
 			
 			//vista.setTitle("1");
+			
+			
 		}
 		
-		if (e.getSource() == vista.getGuardar() || e.getSource() == vista.getGuardarArchivo()) {
+		if (e.getSource() == vista.getGuardar()) {
 			
 			//vista.setTitle("2");
 			
@@ -75,13 +76,14 @@ public class Controlador implements ActionListener{
 				
 			} catch (SQLException e1) {
 
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(vista, "Este DNI ya existe", "ERROR", JOptionPane.ERROR_MESSAGE);
+				
 			}
 			
 			
 		}
 		
-		if (e.getSource() == vista.getLimpiar() || e.getSource() == vista.getLimpiarArchivo()) {
+		if (e.getSource() == vista.getLimpiar()) {
 			
 			//vista.setTitle("3");
 			
@@ -91,7 +93,7 @@ public class Controlador implements ActionListener{
 			vista.getFecha().setText(null);
 		}
 		
-		if (e.getSource() == vista.getEliminar() || e.getSource() == vista.getEliminarArchivo()) {
+		if (e.getSource() == vista.getEliminar() ) {
 			
 			//vista.setTitle("4");
 			
@@ -105,12 +107,17 @@ public class Controlador implements ActionListener{
 						
 						this.daoDni.eliminaDni(dni);
 						JOptionPane.showMessageDialog(vista, "El dni se ha eliminado correctamente");
+						vista.getNombre().setText(null);
+						vista.getDni().setText(null);
+						vista.getNumTelefono().setText(null);
+						vista.getFecha().setText(null);
 						
 					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
+
 						e1.printStackTrace();
+						
 					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
+
 						e1.printStackTrace();
 					}
 					
@@ -122,8 +129,94 @@ public class Controlador implements ActionListener{
 			}
 
 			
-			
+		}
+
+		if (e.getSource() == vista.getPrimero()) {
+
+			try {
+
+				this.muestraDisco(this.daoDni.getPrimero());
+
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(vista, "No hay ningun DNI para cargar");
+			} catch (MiExcepcion e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+
+		if (e.getSource() == vista.getAnterior()) {
+
+			try {
+
+				this.muestraDisco(this.daoDni.getAnterior());
+
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				try {
+					this.daoDni.getSiguiente();
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(vista, "No hay ningun DNI para cargar");
+				} catch (MiExcepcion e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+			} catch (MiExcepcion e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		if (e.getSource() == vista.getSiguiente()) {
+
+			try {
+
+				this.muestraDisco(this.daoDni.getSiguiente());
+
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				try {
+					this.daoDni.getAnterior();
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(vista, "No hay ningun DNI para cargar");
+				} catch (MiExcepcion e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+			} catch (MiExcepcion e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		if (e.getSource() == vista.getUltimo()) {
+
+			try {
+
+				this.muestraDisco(this.daoDni.getUltimo());
+
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(vista, "No hay ningun DNI para cargar");
+			} catch (MiExcepcion e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 	}
+	
+	//Metodo para cargar dnis
+	private void muestraDisco(Dni ob) {
+
+		this.vista.getNombre().setText(ob.getNombre());
+		this.vista.getDni().setText(ob.getDni());
+		this.vista.getNumTelefono().setText((ob.getNumTelefono() + ""));
+		this.vista.getFecha().setText(ob.getFechaNacimiento() + "");
+	}
+	
+	
 }
